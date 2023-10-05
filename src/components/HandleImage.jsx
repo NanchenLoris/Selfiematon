@@ -14,10 +14,11 @@ export default function HandleImage() {
 
     const location = useLocation()
     const navigate = useNavigate();
-
+    
     const [imgId, setImgId] = useState()
     const [imgName, setImgName] = useState()
     const [isLoading, setIsLoading] = useState(true);
+
 
     /**
      * fonction asynchrone pour recuperer l'image selon l'id recu
@@ -36,7 +37,7 @@ export default function HandleImage() {
     }
 
     /**
-     * fonction asynchrone pour supprimer l'image de la base de données.
+     * fonction asynchrone pour supprimer l'image de la base de données
      */
     const delImg = async() => {
         if (confirm("Are you sure you want to delete this screenshot ?") == true) {
@@ -57,8 +58,8 @@ export default function HandleImage() {
 
     return(
         <div>
-            <img src={`http://127.0.0.1:8090/api/files/galerie/${imgId}/${imgName}`} alt="image" />
-            <div className="buttons" id='buttons'>
+            <img src={`http://127.0.0.1:8090/api/files/galerie/${imgId}/${imgName}`} id='imageFilter' style={{filter: imgFilter}} alt="image"></img>
+            <div className="buttons">
                 <button className="button"><img src={print}></img></button>
                 <button className="button"><img src={insta}></img></button>
                 <button className="button" onClick={delImg}><img src={trash}></img></button>
