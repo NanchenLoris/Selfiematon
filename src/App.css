@@ -1,0 +1,125 @@
+#root {
+  text-align: center;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.header {
+  background-color: rgb(85, 85, 85);
+  height: 10vh;
+  width: 100vw;
+}
+
+.footer {
+  background-color: rgb(85, 85, 85);
+  height: 10vh;
+  width: 100vw;
+}
+
+.outlet {
+  background-color: #cacaca;
+  height: 80vh;
+  width: 100vw;
+}
+
+.button {
+  margin: 0 3px 0 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 9em;
+  min-height: 2.4em;
+  background-color: #242424;
+  color: white;
+  border-radius: 5px;
+  transition: .5s;
+  border: white solid 1px;
+}
+
+.button:hover {
+  border: #242424 solid 1px;
+  color: white;
+}
+
+.video {
+  width: auto;
+  height: 50vh;
+  background-color: #cacaca;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2em;
+}
+
+.header-start {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.header-end {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 1em;
+}
+
+h3 {
+  margin: 0;
+}
+
+.register, .login, .account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+  margin: auto;
+}
+
+.buttons, .buttons-acc {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  margin-top: 1em;
+  min-width: 15em;
+}
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 78vh;
+  overflow-y: scroll;
+  padding-bottom: 1vh;
+  padding-top: 1vh;
+}
+
+.img-gallery {
+  width: 30vw;
+  height: auto;
+  margin: 1em;
+}
+
+.gallery-images {
+  width: 70vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#videoFeed {
+  height: 65vh;
+  width: auto;
+}
+
+.button-after-screenshot {
+  display: flex;
+  justify-content: center;
+}

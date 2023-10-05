@@ -1,0 +1,42 @@
+{
+  "name": "selfiematon",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "buffer": "^6.0.3",
+    "canvas-to-blob": "^1.0.0",
+    "emailjs-com": "^3.2.0",
+    "events": "^3.3.0",
+    "html2canvas": "^1.4.1",
+    "jsmpeg": "^1.0.0",
+    "node-rtsp-stream": "^0.0.9",
+    "node-stdlib-browser": "^1.2.0",
+    "pocketbase": "^0.17.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.11.0",
+    "twitter-api-v2": "^1.15.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@types/video.js": "^7.3.52",
+    "@vitejs/plugin-react": "^4.0.3",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "react-router-dom": "^6.15.0",
+    "video.js": "^8.5.2",
+    "vite": "^4.4.5",
+    "vite-plugin-node-stdlib-browser": "^0.2.1"
+  }
+}
