@@ -1,5 +1,6 @@
 FROM node:18-alpine
-WORKDIR /app
+WORKDIR /selfiematon
 COPY . .
 RUN npm install
 CMD ["./pocketbase", "serve"; "npm", "run", "dev"]
+EXPOSE 5000

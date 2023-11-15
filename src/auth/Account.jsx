@@ -1,6 +1,5 @@
 import Pocketbase from "pocketbase";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import "../App.css";
 
 export default function Account() {
@@ -49,19 +48,17 @@ export default function Account() {
         }
     }
 
-
+    
     return(
-        <div className="account">
+        <div id="account" className="form">
             <h3>Welcome back {user.username}</h3>
-            <h4>Your current email: {user.email}</h4>
+            <p>Your current email: <br/>{user.email}</p>
             <label>Username:</label>
             <input type="text" onChange={usernameHandleChange} placeholder={user.username}></input>
             <div style={{color: "red"}}>{errorMsg}</div>
-            <div className="buttons-acc">
-                <Link to="/" className="button">← Back</Link>
+            <div className="buttons">
                 <button className="button" onClick={handleClickDelete} style={{color: "red"}}>Delete Account</button>
                 <button className="button" onClick={handleClickUpdate}>Update infos</button>
-                <Link className="button" to="/gallery">View gallery</Link>
             </div>            
         </div>
     )

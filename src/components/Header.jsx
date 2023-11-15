@@ -1,35 +1,43 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PocketBase from 'pocketbase';
+import logo from '../assets/selfiematon.png'
 import "../App.css";
 
 export default function Header() {
 
     const pb = new PocketBase('http://127.0.0.1:8090');
     const user = pb.authStore.model;
+    const navigate = useNavigate()
     
     /**
-     * fonction pour deconnecter l'utilisateur authetifié.
-     * s'affiche si l'utilisateur est authentifié
+     * fonction pour deconnecter l'utilisateur authentifié.
      */
-    function logout() {
+    const logout = () => {
         pb.authStore.clear();
-        window.location.reload(false);
         window.location.replace("/");
     }
 
+    const back = () => {
+        if (window.location.href != "http://localhost:5173/") {
+            navigate(-1)
+        }
+    }
+
     return(
-        <div className="header">
-            {/* <div className="header-start">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-camera" viewBox="0 0 16 16">
-                    <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
-                    <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
-                </svg>
-                Selfiematon
-            </div> */}
+        <div className="Header">
+            <div className="header-start">
+                <img src={logo} alt="logo" id="logo-head"/>
+            </div>
+            <div className="header-center"></div>
             <div className="header-end">
+                <button className="button-header" onClick={back}>Back</button>
+                <button className="button-header" onClick={() => navigate("/")}>Home</button>
+                <button className="button-header" onClick={() => navigate("/gallery")}>Gallery</button>
                 {!user
-                ? <><Link className="button" id="btn-register" to="register">Register</Link><Link className="button" id="btn-login" to="login">Login</Link></>
-                : <><Link className="button" id="btn-logout" onClick={logout}>Logout</Link><Link className="button" id="btn-account" to="account">My Account</Link></>
+                ? <><button className="button-header" id="btn-login" onClick={() => navigate("/login")}>Login</button>
+                    <button className="button-header" id="btn-register" onClick={() => navigate("/register")}>Register</button></>
+                : <><button className="button-header" id="btn-logout" onClick={logout}>Logout</button>
+                    <button className="button-header" id="btn-account" onClick={() => navigate("account")}>Account</button></>
                 }
             </div>
         </div>

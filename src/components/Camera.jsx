@@ -4,7 +4,6 @@ import PocketBase from 'pocketbase';
 import html2canvas from 'html2canvas';
 import '../App.css'
 import { useNavigate } from "react-router-dom";
-import { textTweet } from "../Twitter/Twitter";
 
 
 /**
@@ -14,13 +13,14 @@ import { textTweet } from "../Twitter/Twitter";
 export default function Camera() {
 
   const pb = new PocketBase('http://127.0.0.1:8090');
+  const myForm = new FormData()
 
   const navigate = useNavigate();
   
   const [image, setImage] = useState(null)
   const [blob, setBlob] = useState()
   const [userId, setUserId] = useState();
-  const myForm = new FormData()
+
   
   /**
    * fonction asynchrone pour prendre un screenshot à partir d'une balise html
@@ -45,11 +45,8 @@ export default function Camera() {
     myForm.append("user_id", userId);
     myForm.append("picture", blob)
 
-    console.log(myForm)
-
     try {
         const record = await pb.collection('galerie').create(myForm);
-        console.log(record)
         navigate('/handle', {state: {id: record.id}});
     } catch(error) {
         console.log(error)
@@ -62,25 +59,24 @@ export default function Camera() {
     } else {
       setUserId("hy7rh6svnvaspyb")
     }
-    console.log(userId)
   }, [image])
 
   return (
-    <div className="video-final">
+    <div className="Camera">
       {image === null ?
         (
 				<div className="video">
 					<div className="videoFeed">
 						<VideoFeed id="videoFeed"/>
 					</div>
-					<button onClick={screenshot} className="button">Take Screenshot</button>
+					<button className="button" onClick={screenshot}>Take Photo</button>
 				</div>
         )
         :
         (
           <div>
-            <img src={image} alt="Screenshot" id="screenshot"></img>
-            <div>
+            <img src={image} alt="Screenshot" id="screenshot" ></img>
+            <div className="buttons">
 					      <button className="button" onClick={() => setImage(null)}>Retake</button>
 					      <button className="button" onClick={proceed}>Continue</button>
 				      </div>

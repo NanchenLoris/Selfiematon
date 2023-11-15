@@ -9,6 +9,7 @@ export default function Register() {
 
     const [inputUsername, setInputUsername] = useState();
     const [inputPassword, setInputPassword] = useState();
+    const [inputPasswordConfirm, setInputPasswordConfirm] = useState();
     const [inputEmail, setInputEmail] = useState();
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -20,7 +21,7 @@ export default function Register() {
         const data = {
             username : inputUsername,
             password : inputPassword,
-            passwordConfirm : inputPassword,
+            passwordConfirm : inputPasswordConfirm,
             email : inputEmail,
         };
         try {
@@ -59,20 +60,27 @@ export default function Register() {
         setInputPassword(e.target.value);
     }
 
+    /**
+     * fonction pour changer la valeur de la confirmation du mot de passe
+     * @param {input qui envoie la requete} e 
+     */
+    const passwordConfirmHandleChange = (e) => {
+        setInputPasswordConfirm(e.target.value);
+    }
+
     return(
-        <div className="register">
+        <div id="register" className="form">
             <label>Username:</label>
             <input type="text" onChange={usernameHandleChange} placeholder="ex. John Doe"></input>
             <label>Email:</label>
             <input type="email" onChange={emailHandleChange} placeholder="ex. john.doe@gmail.com"></input>
             <label>Password:</label>
             <input type="password" onChange={passwordHandleChange} placeholder="choose a password..."></input>
-            <label>Your Country:</label>
+            <label>Confirm Password:</label>
+            <input type="password" onChange={passwordConfirmHandleChange} placeholder="confirm your password..."></input>
             <div style={{color: "red"}}>{errorMsg}</div>
-            <Link id="btn-register" to="../login">Already have an account ?</Link>
             <div className="buttons">
-                <Link to="/" className="button">← Back</Link>
-                <Link className="button" onClick={handleClick}>Confirm</Link>
+                <button className="button-form" onClick={handleClick}>Register</button>
             </div>
         </div>
     )

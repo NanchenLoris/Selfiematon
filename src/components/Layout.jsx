@@ -5,12 +5,10 @@ import "../App.css";
 
 export default function Layout() {
 
-    
-
     return(
         <div className="Layout">
             <Header />
-            <div className="outlet">
+            <div className="Outlet">
                 <Outlet></Outlet>
             </div>
             <Footer />

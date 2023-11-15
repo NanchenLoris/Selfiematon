@@ -17,9 +17,10 @@ export default function Login() {
     const handleClick = async() => {
         let password = inputPassword;
         let username = inputUsername;
-
+        console.log("test")
         try {
             const record = await pb.collection('users').authWithPassword(username, password);
+            console.log("test")
             window.location.replace("/");
         }
         catch(error) {
@@ -45,16 +46,14 @@ export default function Login() {
     }
 
     return(
-        <div className="login">
+        <div id="login" className="form">
             <label>Username:</label>
             <input type="text" onChange={usernameHandleChange} placeholder="enter your username..."></input>
             <label>Password:</label>
             <input type="password" onChange={passwordHandleChange} placeholder="enter your password..."></input>
             <div style={{color: "red"}}>{errorMsg}</div>
-            <Link id="btn-register" to="../register">No account yet ?</Link>
             <div className="buttons">
-                <button to="/" className="button">← Back</button>
-                <button className="button" onClick={handleClick}>Confirm</button>
+                <button className="button-form" onClick={handleClick}>Login</button>
             </div>
         </div>
     )

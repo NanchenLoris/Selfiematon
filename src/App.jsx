@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from './auth/Register';
 import Login from './auth/Login';
 import Account from "./auth/Account";
-import Home from "./components/Home";
 import Layout from "./components/Layout";
 import NoPage from "./components/NoPage";
 import Gallery from "./components/Gallery";
+import Camera from "./components/Camera";
 import HandleImage from "./components/HandleImage";
 import './App.css'
 
@@ -17,7 +17,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home/>}/>
+            <Route index element={<Camera/>}/>
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/account" element={<Account />} />

@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import "../App.css"
 
 export default function VideoFeed(props) {
+
   useEffect(() => {
     async function startPlay() {
       const videoEl = document.querySelector('.webrtc-video');
@@ -17,7 +19,6 @@ export default function VideoFeed(props) {
 
       webrtc.ontrack = function (event) {
         videoEl.srcObject = event.streams[0];
-        //videoEl.play();
       };
 
       webrtc.addTransceiver('video', { direction: 'sendrecv' });
@@ -44,11 +45,11 @@ export default function VideoFeed(props) {
       };
 
       const webrtcSendChannel = webrtc.createDataChannel('rtsptowebSendChannel');
-      webrtcSendChannel.onopen = (event) => {
+      webrtcSendChannel.onopen = () => {
         console.log(`${webrtcSendChannel.label} has opened`);
         webrtcSendChannel.send('ping');
       };
-      webrtcSendChannel.onclose = (_event) => {
+      webrtcSendChannel.onclose = () => {
         console.log(`${webrtcSendChannel.label} has closed`);
         startPlay();
       };

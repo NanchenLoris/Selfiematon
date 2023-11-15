@@ -17,12 +17,14 @@
     "events": "^3.3.0",
     "html2canvas": "^1.4.1",
     "jsmpeg": "^1.0.0",
+    "node-popup": "^0.1.14",
     "node-rtsp-stream": "^0.0.9",
     "node-stdlib-browser": "^1.2.0",
     "pocketbase": "^0.17.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
+    "react-to-print": "^2.14.15",
     "twitter-api-v2": "^1.15.1"
   },
   "devDependencies": {

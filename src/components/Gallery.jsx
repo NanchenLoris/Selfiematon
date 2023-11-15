@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PocketBase from 'pocketbase';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Gallery() {
@@ -10,7 +10,7 @@ export default function Gallery() {
 
     const navigate = useNavigate();
     
-    const [records, setRecords] = useState()
+    const [records, setRecords] = useState([])
     const [userId, setUserId] = useState();
     const [isLoading, setIsLoading] = useState(true);
 
@@ -28,7 +28,7 @@ export default function Gallery() {
     /**
      * fonction asynchrone pour recuperer les images liées à l'utilisateur
      */
-    const getInfos = async() => {
+    const getImages = async() => {
         
         try{
             const records = await pb.collection('galerie').getList(1, 50, {
@@ -41,22 +41,14 @@ export default function Gallery() {
         }
     }
 
-    /**
-     * Fonction pour rediriger vers la gestion de l'image cliqué
-     * @param {id de l'image à envoyer pour la gestion de l'image} imgId 
-     */
-    const handleImgClick = (imgId) => {
-        navigate("/handle", {state: {id: imgId}})
-    }
-
     useEffect(() => {
         getId()
         if (userId != null) {
-            getInfos()
+            getImages()
         } else {
             getId()
         }
-        console.log(userId)
+        console.log(records)
     }, [userId])
 
     if (isLoading) {
@@ -66,19 +58,25 @@ export default function Gallery() {
     }
 
     return(
-        <div className="gallery">
-            <div className="buttons">
-                <Link to="/account" className="button">← Back</Link>
-                <Link to="/" className="button">Home</Link>
-            </div>
-            <div className="gallery-images">
-                { records.map((record, index) =>
-                    <button onClick={(e) => handleImgClick(record.id)} key={index}>
-                        <img src={`http://127.0.0.1:8090/api/files/galerie/${record.id}/${record.picture}`} className="img-gallery" alt="image"></img>
-                    </button>
+        <div className="Gallery">
+            
+            {records?.length === 0 ?
+                (
+                <div>
+                    <p>Take pictures to see them appear here</p>
+                    <button className="button" onClick={() => navigate("/")}>Take Picture</button>
+                </div>
+                )
+                :
+                (
+                <div className="gallery-images">
+                    { records.map((record, index) =>
+                        <button onClick={(e) => navigate("/handle", {state: {id: record.id}})} className="button-gallery" key={index}>
+                            <img src={`http://127.0.0.1:8090/api/files/galerie/${record.id}/${record.picture}`} className="img-gallery" alt="image"></img>
+                        </button>
+                    )}
+                </div>
                 )}
-            </div>
-            <a href="" className="button">Back to top ↑</a>
         </div>
     )
 }

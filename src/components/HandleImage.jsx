@@ -1,11 +1,14 @@
 import {useLocation, useNavigate} from 'react-router-dom';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, forwardRef } from "react";
+import Twitter from './Twitter';
 import PocketBase from 'pocketbase';
-import html2canvas from 'html2canvas';
-import insta from '../assets/instagram.svg';
-import print from '../assets/printer.svg';
+import twitter from '../assets/twitter.svg';
+import printer from '../assets/printer.svg';
 import trash from '../assets/trash3.svg';
-import back from '../assets/arrow.svg';
+import mail from '../assets/mail.svg';
+import "../App.css";
+import ReactToPrint from 'react-to-print';
+import Mail from './Mail';
 
 export default function HandleImage() {
 
@@ -14,7 +17,10 @@ export default function HandleImage() {
 
     const location = useLocation()
     const navigate = useNavigate();
+    let ref = useRef();
     
+    const [displayTwitter, setDisplayTwitter] = useState("none")
+    const [displayMail, setDisplayMail] = useState("none")
     const [imgId, setImgId] = useState()
     const [imgName, setImgName] = useState()
     const [isLoading, setIsLoading] = useState(true);
@@ -42,9 +48,33 @@ export default function HandleImage() {
     const delImg = async() => {
         if (confirm("Are you sure you want to delete this screenshot ?") == true) {
             await pb.collection('galerie').delete(imgId);
-            window.location.replace("/");
+            navigate(-1)
         }
     }
+
+    const showTwitter = () => {
+        if (displayTwitter == "none") {
+            setDisplayTwitter("block")
+        } else {
+            setDisplayTwitter("none")
+        }
+    }
+
+    const showMail = () => {
+        if (displayMail == "none") {
+            setDisplayMail("block")
+        } else {
+            setDisplayMail("none")
+        }
+    }
+
+    const MyPrintComponent = forwardRef((props, ref) => {
+        return(
+            <div ref={ref} className='print'>
+                <img src={`http://127.0.0.1:8090/api/files/galerie/${imgId}/${imgName}`} id='image' alt="image"></img>
+            </div>
+        )
+    })
 
     useEffect(() => {
         getInfos()
@@ -57,13 +87,25 @@ export default function HandleImage() {
     }
 
     return(
-        <div>
-            <img src={`http://127.0.0.1:8090/api/files/galerie/${imgId}/${imgName}`} id='imageFilter' style={{filter: imgFilter}} alt="image"></img>
+        <div className='HandleImage'>
+            <div className='twitter' style={{display: displayTwitter}}>
+                <Twitter imgId={imgId} imgName={imgName} showTwitter={showTwitter}/>
+            </div>
+            <div className='mail' style={{display: displayMail}}>
+                <Mail imgId={imgId} imgName={imgName} showMail={showMail}/>
+            </div>
+            <img src={`http://127.0.0.1:8090/api/files/galerie/${imgId}/${imgName}`} id='image' alt="image"></img>
+            <div style={{display: "none"}}>
+                <MyPrintComponent ref={(el) => (ref = el)} />
+            </div>
             <div className="buttons">
-                <button className="button"><img src={print}></img></button>
-                <button className="button"><img src={insta}></img></button>
+                <ReactToPrint
+                    trigger={() => <button className="button"><img src={printer}></img></button>}
+                    content={() => ref}
+                />
+                <button className="button" onClick={showTwitter}><img src={twitter}></img></button>
+                <button className="button" onClick={showMail}><img src={mail}></img></button>
                 <button className="button" onClick={delImg}><img src={trash}></img></button>
-                <button className='button' onClick={() => navigate(-1)}><img src={back}></img></button>
             </div>
         </div>
     )
