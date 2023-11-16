@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import Pocketbase from "pocketbase";
-import { Link } from "react-router-dom";
 import "../App.css";
 
 export default function Register() {

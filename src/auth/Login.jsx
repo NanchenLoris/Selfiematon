@@ -1,6 +1,5 @@
 import { useState } from "react";
 import PocketBase from 'pocketbase';
-import { Link } from "react-router-dom";
 import "../App.css";
 
 export default function Login() {

@@ -64,13 +64,6 @@ body {
   width: auto;
 }
 
-@media only screen and (max-width: 375px) {
-  #logo-head {
-    width: 100vw;
-    height: auto;
-  }
-}
-
 .button-header {
   background-color: #cacaca;
   width: 8em;
@@ -114,6 +107,7 @@ body {
   color: #242424;
   transition: .5s;
   width: 8em;
+  max-width: 20vw;
   height: 3em;
 }
 
@@ -192,6 +186,29 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.Alert {
+  border: #94a8b3 3px solid;
+  background-color: #cacaca;
+  position: absolute;
+  padding: 2em;
+  width: 15em;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0; 
+}
+
+@media only screen and (max-width: 375px) {
+  #logo-head {
+    width: 100vw;
+    height: auto;
+  }
+
+  .Alert {
+    width: 60vw;
+  }
 }
 
 #login {
@@ -317,10 +334,16 @@ h3 {
 
 #image, #screenshot {
   border: #94a8b3 3px solid;
+  max-width: 95vw;
+  max-height: 45vw;
 }
 
 .HandleImage {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 input {

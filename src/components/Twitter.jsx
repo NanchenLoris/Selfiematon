@@ -16,7 +16,6 @@ export default function Twitter(props) {
     })
     const result = await response.json();
     if (result.msg == "Sucessfully tweeted!") {
-      alert(result.msg)
       props.showTwitter()
     }
   }

@@ -59,24 +59,18 @@ export default function Gallery() {
 
     return(
         <div className="Gallery">
-            
             {records?.length === 0 ?
-                (
-                <div>
+                (<div>
                     <p>Take pictures to see them appear here</p>
                     <button className="button" onClick={() => navigate("/")}>Take Picture</button>
-                </div>
-                )
-                :
-                (
+                </div>) : (
                 <div className="gallery-images">
                     { records.map((record, index) =>
                         <button onClick={(e) => navigate("/handle", {state: {id: record.id}})} className="button-gallery" key={index}>
                             <img src={`http://127.0.0.1:8090/api/files/galerie/${record.id}/${record.picture}`} className="img-gallery" alt="image"></img>
                         </button>
                     )}
-                </div>
-                )}
+                </div>)}
         </div>
     )
 }

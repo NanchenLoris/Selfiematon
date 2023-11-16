@@ -1,5 +1,6 @@
 import Pocketbase from "pocketbase";
 import { useState } from "react";
+import Alert from '../components/Alert';
 import "../App.css";
 
 export default function Account() {
@@ -9,6 +10,7 @@ export default function Account() {
 
     const [inputUsername, setInputUsername] = useState(user.username);
     const [errorMsg, setErrorMsg] = useState("");
+    const [displayAlert, setDisplayAlert] = useState("none")
 
 
     /**
@@ -19,6 +21,16 @@ export default function Account() {
         setInputUsername(e.target.value);
     }
 
+    /**
+     * fonction pour changer l'affichage du composant Alert.jsx
+     */
+    const showAlert = () => {
+        if (displayAlert == "none") {
+            setDisplayAlert("block")
+        } else {
+            setDisplayAlert("none")
+        }
+    }
 
     /**
      * fonction asynchrone pour changer le pseudo dans la base de données
@@ -41,23 +53,24 @@ export default function Account() {
      * fonction asynchrone pour supprimer le compte de la base de données
      */
     const handleClickDelete = async() => {
-        if (confirm("Are you sure you want to delete this account ?") == true) {
-            console.log("k deleted");
-            await pb.collection('users').delete(user.id);
-            window.location.replace("/");
-        }
+        console.log("k deleted");
+        await pb.collection('users').delete(user.id);
+        window.location.replace("/");
     }
 
     
     return(
         <div id="account" className="form">
+            <div className='alert' style={{display: displayAlert}}>
+                <Alert continue={handleClickDelete} cancel={showAlert} />
+            </div>
             <h3>Welcome back {user.username}</h3>
             <p>Your current email: <br/>{user.email}</p>
             <label>Username:</label>
             <input type="text" onChange={usernameHandleChange} placeholder={user.username}></input>
             <div style={{color: "red"}}>{errorMsg}</div>
             <div className="buttons">
-                <button className="button" onClick={handleClickDelete} style={{color: "red"}}>Delete Account</button>
+                <button className="button" onClick={() => setDisplayAlert("block")} style={{color: "red"}}>Delete Account</button>
                 <button className="button" onClick={handleClickUpdate}>Update infos</button>
             </div>            
         </div>

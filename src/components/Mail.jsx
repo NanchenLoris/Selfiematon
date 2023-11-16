@@ -16,7 +16,6 @@ export default function Mail(props) {
     })
     const result = await response.json();
     if (result.msg == 'Sucessfully sent mail !') {
-      alert(result.msg)
       props.showMail()
     }
   }

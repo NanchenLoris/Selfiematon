@@ -9,6 +9,7 @@ import mail from '../assets/mail.svg';
 import "../App.css";
 import ReactToPrint from 'react-to-print';
 import Mail from './Mail';
+import Alert from './Alert';
 
 export default function HandleImage() {
 
@@ -21,6 +22,7 @@ export default function HandleImage() {
     
     const [displayTwitter, setDisplayTwitter] = useState("none")
     const [displayMail, setDisplayMail] = useState("none")
+    const [displayAlert, setDisplayAlert] = useState("none")
     const [imgId, setImgId] = useState()
     const [imgName, setImgName] = useState()
     const [isLoading, setIsLoading] = useState(true);
@@ -46,12 +48,13 @@ export default function HandleImage() {
      * fonction asynchrone pour supprimer l'image de la base de données
      */
     const delImg = async() => {
-        if (confirm("Are you sure you want to delete this screenshot ?") == true) {
-            await pb.collection('galerie').delete(imgId);
-            navigate(-1)
-        }
+        await pb.collection('galerie').delete(imgId);
+        navigate(-1)
     }
 
+    /**
+     * fonction pour changer l'affichage du composant Twitter
+     */
     const showTwitter = () => {
         if (displayTwitter == "none") {
             setDisplayTwitter("block")
@@ -60,11 +63,25 @@ export default function HandleImage() {
         }
     }
 
+    /**
+     * fonction pour changer l'affichage du composant Mail
+     */
     const showMail = () => {
         if (displayMail == "none") {
             setDisplayMail("block")
         } else {
             setDisplayMail("none")
+        }
+    }
+
+    /**
+     * fonction pour changer l'affichage du composant Twitter
+     */
+    const showAlert = () => {
+        if (displayAlert == "none") {
+            setDisplayAlert("block")
+        } else {
+            setDisplayAlert("none")
         }
     }
 
@@ -88,6 +105,9 @@ export default function HandleImage() {
 
     return(
         <div className='HandleImage'>
+            <div className='alert' style={{display: displayAlert}}>
+                <Alert continue={delImg} cancel={showAlert} />
+            </div>
             <div className='twitter' style={{display: displayTwitter}}>
                 <Twitter imgId={imgId} imgName={imgName} showTwitter={showTwitter}/>
             </div>
@@ -105,7 +125,7 @@ export default function HandleImage() {
                 />
                 <button className="button" onClick={showTwitter}><img src={twitter}></img></button>
                 <button className="button" onClick={showMail}><img src={mail}></img></button>
-                <button className="button" onClick={delImg}><img src={trash}></img></button>
+                <button className="button" onClick={() => setDisplayAlert("block")}><img src={trash}></img></button>
             </div>
         </div>
     )
