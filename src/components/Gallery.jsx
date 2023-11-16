@@ -21,7 +21,7 @@ export default function Gallery() {
         if (pb.authStore.model != undefined) {
             setUserId(pb.authStore.model.id)
         } else {
-            setUserId("hy7rh6svnvaspyb")
+            setUserId("vaq9dslk5ds1eqi")
         }
     }
 
@@ -48,7 +48,6 @@ export default function Gallery() {
         } else {
             getId()
         }
-        console.log(records)
     }, [userId])
 
     if (isLoading) {

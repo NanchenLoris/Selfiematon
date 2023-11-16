@@ -287,6 +287,7 @@ h3 {
 
 .tweet, .mailer {
   width: 50em;
+  max-width: 80vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -330,6 +331,7 @@ h3 {
 #imgTwitter, #imgMail {
   width: 90%;
   height: 90%;
+  max-width: 65vw;
 }
 
 #image, #screenshot {
@@ -349,6 +351,7 @@ h3 {
 input {
   background-color: #cacaca;
   border-radius: 5px;
+  max-width: 70vw;
   color: #242424;
   border: none;
   outline: none;
